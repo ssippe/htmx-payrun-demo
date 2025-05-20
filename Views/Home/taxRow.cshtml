@@ -1,0 +1,20 @@
+﻿@using payrun_htmx.Controllers
+@model GridModel;
+@{
+    Layout = null;
+}
+
+<tr id="tax-row" hx-swap-oob="true">
+    <td>@Model.DefaultTax</td>
+    <td>
+        <input hx-post="home/updateOverrideTax" name="@Html.NameFor(f=>f.OverrideTax)" type="number" value="@Model.OverrideTax" hx-target="closest tr" hx-swap="outerHTML" hx-indicator="#spinner" />
+     </td>
+    <td>@Model.TotalTax</td>
+</tr>
+@{
+    var gridModel = ViewData["ShowTotalsGridModel"] as GridModel;
+}
+@if (gridModel != null)
+{
+    <partial name="totalRow" model="gridModel"/>
+}

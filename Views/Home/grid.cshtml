@@ -1,0 +1,58 @@
+﻿@using payrun_htmx.Controllers
+@model GridModel
+@{
+    Layout = null;
+}
+
+<!-- multiple rows of salary -->
+<h2>Earnings and Leave</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hours</th>
+            <th>Rate</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @for (int i = 0; i < Model.Earnings.Count; i++)
+        {
+            @* <partial name="earningsRow" for="Earnings[i]" /> *@
+            <partial name="earningsRow" model="Model.Earnings[i]" />
+        }
+        <tr>
+            <td><input type="submit" value="Add" /></td>
+        </tr>
+    </tbody>
+</table>
+
+<h2>Tax</h2>
+<!-- single row of tax -->
+<table class="table">
+    <thead>
+        <tr>
+            <th>Default Tax</th>
+            <th>Override Tax</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        <partial name="taxRow" model="Model" />
+    </tbody>
+</table>
+
+<h2>Total</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Earnings and Leave</th>
+            <th>Tax</th>
+            <th>Net Pay</th>
+            <th>Save Count</th>
+        </tr>
+    </thead>
+    <tbody>
+        <partial name="totalRow" model="Model" />
+    </tbody>
+</table>
+

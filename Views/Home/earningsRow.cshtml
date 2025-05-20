@@ -1,0 +1,31 @@
+﻿@using payrun_htmx.Controllers
+@model EarningsModel;
+@{
+    Layout = null;
+}
+
+
+<tr>
+    <td>
+
+        <input type="hidden" asp-for="Id" />
+        <input hx-post="home/updateEarningRow" name="@Html.NameFor(f=>f.Hours)" type="number" value="@Model.Hours" hx-target="closest tr" hx-include="closest tr" hx-swap="outerHTML" hx-indicator="#spinner" />
+    </td>
+    <td>
+        <input hx-post="home/updateEarningRow" name="@Html.NameFor(f=>f.Rate)" type="number" value="@Model.Rate" hx-target="closest tr" hx-include="closest tr" hx-swap="outerHTML" hx-indicator="#spinner" />
+    </td>
+    <td>
+        @Model.Total
+        
+    </td>
+</tr>
+
+
+@{
+    var gridModel = ViewData["ShowTotalsGridModel"] as GridModel;
+}
+@if (gridModel != null)
+{
+    <partial name="totalRow" model="gridModel" />
+    <partial name="taxRow" model="gridModel" />
+}

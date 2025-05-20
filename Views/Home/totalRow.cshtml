@@ -1,0 +1,22 @@
+﻿@using payrun_htmx.Controllers
+@model GridModel;
+@{
+    Layout = null;
+}
+
+<tr hx-swap-oob="true" id="total-row">
+    <td>
+        @Model.TotalEarnings
+    </td>
+    <td>
+        @Model.TotalTax
+    </td>
+    <td>
+        @Model.NetPay
+    </td>
+    <td>@Model.SaveCount
+        <img id="spinner" class="htmx-indicator" src="~/90-ring.svg" />
+    </td>
+</tr>
+
+
